@@ -64,13 +64,3 @@ cd dist/
 
 # Execute the native binary layout directly
 ./MCLauncher
-
-🚀 GitHub Release Guidelines
-
-When distributing compilation updates or transferring workspaces:
-
-    Ensure your local .gitignore is active so internal compilation directories (build/, __pycache__/, .spec) are never committed to your upstream branch.
-
-    Navigate to your GitHub repository dashboard, select Releases -> Draft a new release.
-
-    Tag your release profile version (e.g., v1.0.0), attach a release summary title, and drag-and-drop your standalone dist/MCLauncher binary directly into the asset deployment tray!
