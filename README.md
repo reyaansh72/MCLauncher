@@ -1,66 +1,83 @@
 # MCLauncher
 
-A clean, minimalist, high-performance daily-driver Minecraft Launcher built with Python, PySide6, and Material UI. This project communicates directly with native system configurations, keeping runtime operations fast, resource-friendly, and completely free of bloat.
+A lightweight, high-performance Minecraft launcher built with Python and Tkinter.
 
-## 🛠️ Project Architecture
+MCLauncher directly uses the official Mojang version manifest and handles full game installation, including libraries, client jars, Java selection, and local configuration management.
 
-To maintain a lightweight and easily maintainable codebase, this repository strictly tracks only the **three crucial files** required to execute and run the launcher infrastructure:
-
-* `app.py` — Core UI architecture, game instance deployment routines, and thread-safe process managers.
-* `config.json` — Local user data, active authentication configurations, and runtime flags.
-* `java_rules.txt` — Manifest parsing maps for version listings and distribution path logic.
+It supports Minecraft versions from **1.3 up to 1.21.11+ stable releases**, with configurable Java rules for newer and experimental versions.
 
 ---
 
-## 🏗️ Development & Build Guide
+## 🧠 Project Architecture
 
-Follow these steps to configure your local workspace environment on Arch Linux and compile the launcher into a zero-dependency standalone native executable binary.
+The launcher is built around three core files:
 
-### 1. Environment Initialization
+- `app.py` — Main UI, download system, and game execution logic  
+- `config.json` — Stores user settings (username, version, RAM)  
+- `java_rules.txt` — Defines Java version mapping per Minecraft version  
 
-Navigate into your project folder and ensure your files are in place:
+---
+
+## ⚙️ Features
+
+- 📦 Automatic version list from Mojang manifest  
+- 📚 Full library download system  
+- ☕ Automatic Java selection per version  
+- 🚀 Offline/legacy game launch support  
+- 💾 Persistent configuration saving  
+- 📊 Download progress tracking  
+- 🖥️ Clean Tkinter-based UI  
+
+---
+
+## 🛠️ Setup
+
+### 1. Enter project directory
 
 ```bash
-cd MyFirstProjectNoAi/
-
-Initialize your Python virtual environment and install the essential runtime frameworks:
-Bash
-
-# Set up an isolated workspace environment
+cd MyFirstProjectNoAi
+2. Create virtual environment
 python -m venv venv
 source venv/bin/activate
+3. Install dependencies
+pip install requests
+▶️ Run Launcher
+python app.py
+📁 Project Structure
+MyFirstProjectNoAi/
+├── app.py
+├── config.json
+├── java_rules.txt
+├── minecraft/        (auto-generated)
+└── venv/
+☕ Java Version Compatibility
 
-# Install critical dependencies
-pip install PySide6 qt-material requests platformdirs pyinstaller
+MCLauncher supports Minecraft versions from 1.3 up to 1.21.11+ stable releases.
 
-2. Standalone Binary Compilation
+Minecraft’s runtime requirements evolve over time. Starting with Minecraft Java Edition 26.1+, Java 25 is required due to internal system and engine updates.
+Official reference:
+https://www.minecraft.net/en-us/article/minecraft-java-edition-26-1
 
-To bundle all background modules, stylesheets, dynamic window graphics engine layouts, and network protocols into a single portable application executable file, run PyInstaller:
-Bash
+⚠️ Compatibility Table
+✔ Minecraft 1.3 → 1.16 → Java 8
+✔ Minecraft 1.17 → 1.20.x → Java 17
+✔ Minecraft 1.21 → 1.21.11 → Java 21 (recommended stable support)
+⚠ Minecraft 1.21.11+ (future / experimental builds) → may require Java 25 or newer
+❌ Versions above 1.21.11 may require manual Java rule updates
+🔧 Java Rules System
 
-pyinstaller --onefile --windowed \
-    --name="MCLauncher" \
-    --collect-all "qt_material" \
-    --collect-all "PySide6" \
-    --hidden-import="requests" \
-    --hidden-import="platformdirs.loaders" \
-    app.py
+java_rules.txt defines which Java version is used per Minecraft version.
 
-3. Local Deployment & Execution
+Format:
+# max_version|java_version|download_url
 
-Once the build engine finishes processing, your portable standalone binary will be generated inside the newly created dist/ directory.
-
-Because the launcher actively reads and writes user profile states dynamically at runtime, you must copy your configuration assets directly next to your executable:
-Bash
-
-# Navigate to deployment distribution folder
-cd dist/
-
-# Ensure your structure matches this arrangement exactly:
-# dist/
-# ├── MCLauncher        <-- Compiled Standalone Application
-# ├── config.json       <-- User settings profiles
-# └── java_rules.txt    <-- System platform rules
-
-# Execute the native binary layout directly
-./MCLauncher
+1.16|8|<Java 8 URL>
+1.20|17|<Java 17 URL>
+1.21.11|21|<Java 21 URL>
+26.1|25|<Java 25 URL (future support)>
+999|25|<latest experimental builds>
+🧠 Notes for Advanced Users
+New Minecraft versions may change Java requirements without warning
+If a version fails to launch, adjust java_rules.txt manually
+Experimental builds may require newer Java versions earlier than stable releases
+Java selection is fully configurable per version rule
