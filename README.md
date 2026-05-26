@@ -1,20 +1,22 @@
 # MCLauncher
 
-A lightweight, high-performance Minecraft launcher built with Python and Tkinter.
+> ⚠️ **This is a hobby project** — not the most polished launcher out there, but it works and gets the job done. Built for fun and learning.
 
-MCLauncher directly uses the official Mojang version manifest and handles full game installation, including libraries, client jars, Java selection, and local configuration management.
+A lightweight Minecraft launcher built with Python and Tkinter. MCLauncher uses the official Mojang version manifest directly and handles full game installation — libraries, client jars, Java selection, and local config management.
 
-It supports Minecraft versions from **1.3 up to 1.21.11+ stable releases**, with configurable Java rules for newer and experimental versions.
+Supports Minecraft **1.3 → 1.21.11+ stable releases**, with configurable Java rules for newer and experimental versions.
+
+> 🐧 **Linux only.** Windows and macOS are not supported.
 
 ---
 
 ## 🧠 Project Architecture
 
-The launcher is built around three core files:
-
-- `app.py` — Main UI, download system, and game execution logic
-- `config.json` — Stores user settings (username, version, RAM)
-- `java_rules.txt` — Defines Java version mapping per Minecraft version
+| File | Role |
+|------|------|
+| `app.py` | Main UI, download system, and game execution logic |
+| `config.json` | Stores user settings (username, version, RAM) |
+| `java_rules.txt` | Java version mapping per Minecraft version |
 
 ---
 
@@ -30,30 +32,68 @@ The launcher is built around three core files:
 
 ---
 
-## 🛠️ Setup
+## 🐧 Binary Release (Linux)
 
-### 1. Enter project directory
+Pre-built binaries are available on the [Releases](../../releases) page. No Python install needed.
+
+**Requirements:**
+- Linux (x86_64)
+- Python 3.14 runtime (must be installed and available on your system)
+
+**Run:**
 
 ```bash
+chmod +x MCLauncher
+./MCLauncher
+```
+
+That's it. No venv, no pip, no setup.
+
+---
+
+## 🔨 Build from Source
+
+### Requirements
+
+- Linux
+- Python 3.14+
+- The following standard and third-party libraries:
+
+| Library | Type | Install |
+|---------|------|---------|
+| `sys` | stdlib | built-in |
+| `os` | stdlib | built-in |
+| `json` | stdlib | built-in |
+| `subprocess` | stdlib | built-in |
+| `tarfile` | stdlib | built-in |
+| `shutil` | stdlib | built-in |
+| `threading` | stdlib | built-in |
+| `zipfile` | stdlib | built-in |
+| `requests` | third-party | `pip install requests` |
+
+### Steps
+
+**1. Clone and enter the project directory**
+
+```bash
+git clone <repo-url>
 cd MyFirstProjectNoAi
 ```
 
-### 2. Create virtual environment
+**2. Create a virtual environment**
 
 ```bash
-python -m venv venv
+python3.14 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Install dependencies
+**3. Install dependencies**
 
 ```bash
 pip install requests
 ```
 
----
-
-## ▶️ Run Launcher
+**4. Run**
 
 ```bash
 python app.py
@@ -68,7 +108,7 @@ MyFirstProjectNoAi/
 ├── app.py
 ├── config.json
 ├── java_rules.txt
-├── minecraft/        (auto-generated)
+├── minecraft/        (auto-generated on first launch)
 └── venv/
 ```
 
@@ -76,27 +116,27 @@ MyFirstProjectNoAi/
 
 ## ☕ Java Version Compatibility
 
-MCLauncher supports Minecraft versions from **1.3 up to 1.21.11+ stable releases**.
+MCLauncher supports Minecraft from **1.3 up to 1.21.11+ stable releases**.
 
-Minecraft's runtime requirements evolve over time. Starting with Minecraft Java Edition 26.1+, Java 25 is required due to internal system and engine updates.
+Java requirements change as Minecraft evolves — starting with Java Edition 26.1+, Java 25 is required.
 
 Official reference: https://www.minecraft.net/en-us/article/minecraft-java-edition-26-1
 
-### ⚠️ Compatibility Table
+### Compatibility Table
 
-| Status | Minecraft Version | Java Version |
-|--------|-------------------|--------------|
-| ✔ Supported | 1.3 → 1.16 | Java 8 |
-| ✔ Supported | 1.17 → 1.20.x | Java 17 |
-| ✔ Supported | 1.21 → 1.21.11 | Java 21 (recommended stable) |
-| ⚠ Experimental | 1.21.11+ (future builds) | May require Java 25 or newer |
-| ❌ Manual update needed | Versions above 1.21.11 | Requires manual `java_rules.txt` update |
+| Status | Minecraft Version | Required Java |
+|--------|-------------------|---------------|
+| ✅ Stable | 1.3 → 1.16 | Java 8 |
+| ✅ Stable | 1.17 → 1.20.x | Java 17 |
+| ✅ Stable | 1.21 → 1.21.11 | Java 21 |
+| ⚠️ Experimental | 1.21.11+ (future builds) | Java 25 or newer |
+| ❌ Manual config needed | Above 1.21.11 | Update `java_rules.txt` manually |
 
 ---
 
 ## 🔧 Java Rules System
 
-`java_rules.txt` defines which Java version is used per Minecraft version.
+`java_rules.txt` controls which Java version is used for each Minecraft version range.
 
 **Format:**
 
@@ -105,15 +145,15 @@ Official reference: https://www.minecraft.net/en-us/article/minecraft-java-editi
 1.16|8|<Java 8 URL>
 1.20|17|<Java 17 URL>
 1.21.11|21|<Java 21 URL>
-26.1|25|<Java 25 URL (future support)>
-999|25|<latest experimental builds>
+26.1|25|<Java 25 URL>
+999|25|<experimental / latest builds>
 ```
 
 ---
 
-## 🧠 Notes for Advanced Users
+## 🧠 Advanced Notes
 
-- New Minecraft versions may change Java requirements without warning
-- If a version fails to launch, adjust `java_rules.txt` manually
-- Experimental builds may require newer Java versions earlier than stable releases
-- Java selection is fully configurable per version rule
+- Java requirements can change between Minecraft releases without warning
+- If a version fails to launch, tweak `java_rules.txt` to adjust the Java mapping
+- Experimental builds may require newer Java earlier than stable releases
+- Java selection is fully configurable — you're in control
