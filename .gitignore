@@ -1,0 +1,10 @@
+# Ignore absolutely everything by default
+/*
+
+# Explicitly whitelist your 3 crucial files
+!app.py
+!config.json
+!java_rules.txt
+
+# Whitelist this ignore file itself so GitHub saves your rules
+!.gitignore
