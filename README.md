@@ -83,7 +83,7 @@ QtGui     — QFont, QColor, QPalette
 
 ### Steps
 
-**1. Clone and enter the project directory**
+**1. Clone the repository**
 
 ```bash
 git clone https://github.com/reyaansh72/MCLauncher.git
@@ -109,12 +109,31 @@ pip install requests PySide6
 python app.py
 ```
 
+**5. Build binary (optional)**
+
+```bash
+pyinstaller --onefile --noconsole --name MCLauncher \
+  --add-data "java_rules.txt:." \
+  --hidden-import PySide6.QtCore \
+  --hidden-import PySide6.QtWidgets \
+  --hidden-import PySide6.QtGui \
+  --hidden-import requests \
+  --hidden-import tarfile \
+  --hidden-import zipfile \
+  --hidden-import threading \
+  --hidden-import shutil \
+  --hidden-import subprocess \
+  app.py
+```
+
+Binary will be at `dist/MCLauncher`.
+
 ---
 
 ## 📁 Project Structure
 
 ```
-MyFirstProjectNoAi/
+MCLauncher/
 ├── app.py
 ├── config.json
 ├── java_rules.txt
@@ -167,3 +186,11 @@ Official reference: https://www.minecraft.net/en-us/article/minecraft-java-editi
 - If a version fails to launch, tweak `java_rules.txt` to adjust the Java mapping
 - Experimental builds may require newer Java earlier than stable releases
 - Java selection is fully configurable — you're in control
+
+---
+
+## 👤 Credits
+
+**Author:** [reyaansh72](https://github.com/reyaansh72)
+
+**Contributors:** None yet — contributions welcome!
