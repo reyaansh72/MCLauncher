@@ -86,8 +86,8 @@ QtGui     — QFont, QColor, QPalette
 **1. Clone and enter the project directory**
 
 ```bash
-git clone <repo-url>
-cd MyFirstProjectNoAi
+git clone https://github.com/reyaansh72/MCLauncher.git
+cd MCLauncher
 ```
 
 **2. Create a virtual environment**
