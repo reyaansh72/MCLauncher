@@ -1,8 +1,8 @@
 # MCLauncher
 
-> ⚠️ **This is a hobby project** — not the most polished launcher out there, but it works and gets the job done. Built for fun and learning.
+> ⚠️ **Hobby project** — not the most polished launcher out there, but it works and gets the job done. Built for fun and learning.
 
-A lightweight Minecraft launcher built with Python and Tkinter. MCLauncher uses the official Mojang version manifest directly and handles full game installation — libraries, client jars, Java selection, and local config management.
+A lightweight Minecraft launcher built with **Python** and **PySide6**. MCLauncher uses the official Mojang version manifest directly and handles full game installation — libraries, client jars, Java selection, and local config management.
 
 Supports Minecraft **1.3 → 1.21.11+ stable releases**, with configurable Java rules for newer and experimental versions.
 
@@ -28,7 +28,7 @@ Supports Minecraft **1.3 → 1.21.11+ stable releases**, with configurable Java 
 - 🚀 Offline/legacy game launch support
 - 💾 Persistent configuration saving
 - 📊 Download progress tracking
-- 🖥️ Clean Tkinter-based UI
+- 🖥️ PySide6-based UI with animations and drop shadows
 
 ---
 
@@ -47,7 +47,7 @@ chmod +x MCLauncher
 ./MCLauncher
 ```
 
-That's it. No venv, no pip, no setup.
+No venv, no pip, no setup.
 
 ---
 
@@ -57,19 +57,29 @@ That's it. No venv, no pip, no setup.
 
 - Linux
 - Python 3.14+
-- The following standard and third-party libraries:
 
-| Library | Type | Install |
-|---------|------|---------|
-| `sys` | stdlib | built-in |
-| `os` | stdlib | built-in |
-| `json` | stdlib | built-in |
-| `subprocess` | stdlib | built-in |
-| `tarfile` | stdlib | built-in |
-| `shutil` | stdlib | built-in |
-| `threading` | stdlib | built-in |
-| `zipfile` | stdlib | built-in |
-| `requests` | third-party | `pip install requests` |
+### Dependencies
+
+**Standard library** (built-in, no install needed):
+
+`sys` `os` `json` `subprocess` `tarfile` `shutil` `threading` `zipfile`
+
+**Third-party** (install via pip):
+
+| Package | Install |
+|---------|---------|
+| `requests` | `pip install requests` |
+| `PySide6` | `pip install PySide6` |
+
+PySide6 modules used: `QtCore`, `QtWidgets`, `QtGui`
+
+```
+QtCore    — Qt, QThread, Signal, Property, QEasingCurve, QPropertyAnimation
+QtWidgets — QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
+            QLabel, QLineEdit, QComboBox, QPushButton, QProgressBar,
+            QTextEdit, QGraphicsDropShadowEffect
+QtGui     — QFont, QColor, QPalette
+```
 
 ### Steps
 
@@ -90,7 +100,7 @@ source venv/bin/activate
 **3. Install dependencies**
 
 ```bash
-pip install requests
+pip install requests PySide6
 ```
 
 **4. Run**
